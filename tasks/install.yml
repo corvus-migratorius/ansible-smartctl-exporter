@@ -28,7 +28,8 @@
     - name: "Unarchive smartctl_exporter tar file"
       notify: "(Re)start and enable smartctl_exporter"
       ansible.builtin.unarchive:
-        src: "https://github.com/prometheus-community/smartctl_exporter/releases/download/v{{ smartctl_exp_version }}/smartctl_exporter-{{ smartctl_exp_version }}.linux-amd64.tar.gz"
+        src: "https://github.com/prometheus-community/smartctl_exporter/releases/\
+              download/v{{ smartctl_exp_version }}/smartctl_exporter-{{ smartctl_exp_version }}.linux-amd64.tar.gz"
         dest: "{{ smartctl_exp_dir }}"
         remote_src: true
 
