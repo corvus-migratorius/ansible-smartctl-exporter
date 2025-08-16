@@ -7,10 +7,21 @@ Type=simple
 User=root
 Group=root
 ExecStart=/usr/local/bin/smartctl_exporter \
-    --web.listen-address=:{{ smartctl_exporter_port }} \
-    {{ smartctl_exporter_args }} \
-    {% if smartctl_exp_web_config is defined and smartctl_exp_web_config | length > 0 %} \
-    --config.file {{ smartctl_exp_web_config }}{% endif %}
+    --web.listen-address=:{{ smartctl_exp_port }} \
+    --smartctl.interval={{ smartctl_exp_interval }} \
+    --smartctl.rescan={{ smartctl_exp_rescan }} \
+{% for device in smartctl_exp_devices %}
+    '--smartctl.device={{ device }}' \
+{% endfor %}
+    --smartctl.device-exclude={{ smartctl_exp_device_exclude }} \
+    --smartctl.device-include={{ smartctl_exp_device_include }} \
+    --web.telemetry-path={{ smartctl_exp_web_telemetry_path }} \  
+    --log.level={{ smartctl_exp_log_level }} \ 
+    --log.format={{ smartctl_exp_log_format }} \
+      {{ smartctl_exp_args }} \
+{% if smartctl_exp_web_config is defined and smartctl_exp_web_config | length > 0 %} \
+    --config.file={{ smartctl_exp_web_config }}
+{% endif %}
 
 [Install]
 WantedBy=multi-user.target
