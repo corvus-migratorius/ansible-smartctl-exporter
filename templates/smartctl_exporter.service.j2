@@ -1,0 +1,16 @@
+[Unit]
+Description=Smartctl Exporter
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/local/bin/smartctl_exporter \
+    --web.listen-address=:{{ smartctl_exporter_port }} \
+    {{ smartctl_exporter_args }} \
+    {% if smartctl_exp_web_config is defined and smartctl_exp_web_config | length > 0 %} \
+    --config.file {{ smartctl_exp_web_config }}{% endif %}
+
+[Install]
+WantedBy=multi-user.target
