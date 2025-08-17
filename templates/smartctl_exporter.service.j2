@@ -10,18 +10,35 @@ ExecStart=/usr/local/bin/smartctl_exporter \
     --web.listen-address=:{{ smartctl_exp_port }} \
     --smartctl.interval={{ smartctl_exp_interval }} \
     --smartctl.rescan={{ smartctl_exp_rescan }} \
-{% for device in smartctl_exp_devices %}
-    '--smartctl.device={{ device }}' \
-{% endfor %}
+{% if smartctl_exp_devices is defined and smartctl_exp_devices | length > 0 %}
+  {% for device in smartctl_exp_devices %}
+    --smartctl.device={{ device }} \
+  {% endfor %}
+{% endif %}
     --smartctl.device-exclude={{ smartctl_exp_device_exclude }} \
     --smartctl.device-include={{ smartctl_exp_device_include }} \
-    --web.telemetry-path={{ smartctl_exp_web_telemetry_path }} \  
-    --log.level={{ smartctl_exp_log_level }} \ 
+    --web.telemetry-path={{ smartctl_exp_web_telemetry_path }} \
+    --log.level={{ smartctl_exp_log_level }} \
     --log.format={{ smartctl_exp_log_format }} \
+{% if smartctl_exp_args is defined and smartctl_exp_args | length > 0 %}
       {{ smartctl_exp_args }} \
+{% endif %}
 {% if smartctl_exp_web_config is defined and smartctl_exp_web_config | length > 0 %} \
     --config.file={{ smartctl_exp_web_config }}
 {% endif %}
+
+SyslogIdentifier=smartctl_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+ProtectSystem=full
 
 [Install]
 WantedBy=multi-user.target
