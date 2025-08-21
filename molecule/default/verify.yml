@@ -24,7 +24,7 @@
     # kics-scan ignore-block
     - name: "Check if /metrics endpoint is reachable"
       ansible.builtin.uri:
-        url: "http://localhost:{{ smartctl_exp_port }}/metrics"
+        url: "http://{{ smartctl_exp_web_listen_address }}/metrics"
         return_content: true
         status_code: 200
         timeout: 5

@@ -1,5 +1,5 @@
 ---
-smartctl_exp_port: 9633
+smartctl_exp_web_listen_address: "localhost:9633"
 smartctl_exp_args: ""
 smartctl_exp_version: "0.14.0"
 smartctl_exp_dir: "/etc/exporters"
