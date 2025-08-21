@@ -22,16 +22,15 @@
         fail_msg: "smartctl_exporter version {{ smartctl_exp_version }} is not installed or not working correctly"
 
     # kics-scan ignore-block
-    - name: Check if /metrics endpoint is reachable
+    - name: "Check if /metrics endpoint is reachable"
       ansible.builtin.uri:
         url: "http://localhost:{{ smartctl_exp_port }}/metrics"
-        return_content: false
+        return_content: true
         status_code: 200
         timeout: 5
       register: metrics_check
-      ignore_errors: true
 
-    - name: Fail if /metrics is unreachable
+    - name: "Fail if /metrics doesn't contain smartctl_exporter_build_info line"
       ansible.builtin.fail:
-        msg: "smartctl_exporter /metrics endpoint is not responding!"
-      when: metrics_check.status != 200
+        msg: "smartctl_exporter /metrics endpoint doesn't contain smartctl_exporter_build_info line!"
+      when: "'smartctl_exporter_build_info' not in metrics_check.content"
