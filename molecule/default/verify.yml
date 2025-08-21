@@ -31,6 +31,7 @@
       register: metrics_check
 
     - name: "Fail if /metrics doesn't contain smartctl_exporter_build_info line"
-      ansible.builtin.fail:
-        msg: "smartctl_exporter /metrics endpoint doesn't contain smartctl_exporter_build_info line!"
-      when: "'smartctl_exporter_build_info' not in metrics_check.content"
+      ansible.builtin.assert:
+        that: "'smartctl_exporter_build_info' in metrics_check.content"
+        fail_msg: "smartctl_exporter /metrics endpoint doesn't contain smartctl_exporter_build_info line!"
+        success_msg: "smartctl_exporter /metrics endpoint contains smartctl_exporter_build_info line!"
