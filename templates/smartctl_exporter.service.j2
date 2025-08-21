@@ -1,6 +1,8 @@
 [Unit]
 Description=Smartctl Exporter
 After=network.target
+StartLimitIntervalSec=120
+StartLimitBurst=5    
 
 [Service]
 Type=simple
@@ -28,10 +30,9 @@ ExecStart=/usr/local/bin/smartctl_exporter \
 {% endif %}
 
 SyslogIdentifier=smartctl_exporter
-Restart=always
-RestartSec=1
-StartLimitInterval=0
-
+Restart=on-failure
+RestartSec=5
+                                                                                                                                                                                                                                                                                
 ProtectHome=yes
 NoNewPrivileges=yes
 ProtectSystem=strict
