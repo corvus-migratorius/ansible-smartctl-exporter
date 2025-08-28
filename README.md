@@ -13,7 +13,7 @@ Role Variables
 The exporter will scan the system for available devices if no ```--smartctl.device``` flags are used. The format of web.config file id described [here](https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md). If ```smartctl_exp_source_web_config_dir``` is defined, role searches for ```web_smartctl.conf``` file and copy it to target host to ```smartctl_exp_web_config_dir``` directory
 ```yaml
 ---
-smartctl_exp_port: 9633  # Addresses on which to expose metrics and web interface. Repeatable for multiple addresses.
+smartctl_exp_port: "localhost:9633"  # Addresses on which to expose metrics and web interface. Repeatable for multiple addresses.
 smartctl_exp_version: "0.14.0" # exporter version to install
 smartctl_exp_dir: "/etc/exporters" # where to download and unarchive expoter 
 smartctl_exp_web_config_dir:  "/etc/exporters/config" # Path to configuration file that can enable TLS or authentication
