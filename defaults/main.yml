@@ -1,9 +1,9 @@
 ---
-smartctl_exp_web_listen_address: "localhost:9633"
+smartctl_exp_web_listen_address: "0.0.0.0:9633"
 smartctl_exp_args: ""
 smartctl_exp_version: "0.14.0"
 smartctl_exp_dir: "/etc/exporters"
-smartctl_exp_web_config_dir: "/etc/exporters/config"
+smartctl_exp_config_dir: "/etc/exporters/config"
 smartctl_exp_interval: "60s"
 smartctl_exp_rescan: "10m"
 smartctl_exp_devices: []
