@@ -43,6 +43,7 @@
         remote_src: true
 
 - name: Create systemd service file
+  notify: "(Re)start and enable smartctl_exporter"
   ansible.builtin.template:
     src: smartctl_exporter.service.j2
     dest: /etc/systemd/system/smartctl_exporter.service
