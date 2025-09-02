@@ -11,7 +11,7 @@
   notify: "(Re)start and enable smartctl_exporter"
   when: smartctl_exp_source_web_config_dir is defined and smartctl_exp_source_web_config_dir | length > 0
   ansible.builtin.template:
-    src: "{{ smartctl_exp_web_con_path }}"
+    src: "{{ smartctl_exp_web_conf_path }}"
     dest: "{{ smartctl_exp_config_dir }}/web_smartctl.conf"
     owner: root
     group: root

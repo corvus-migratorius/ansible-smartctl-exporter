@@ -15,7 +15,6 @@ The exporter will scan the system for available devices if no ```--smartctl.devi
 
 - `smartctl_exp_port`: "0.0.0.0:9633"  # Addresses on which to expose metrics and web interface. Repeatable for multiple addresses.
 - `smartctl_exp_version`: "0.14.0" # exporter version to install
-smartctl_exp_dir: "/etc/exporters" # where to download and unarchive expoter 
 - `smartctl_exp_config_dir`:  "/etc/exporters/config" # Path to configuration file that can enable TLS or authentication
 - `smartctl_exp_interval`: "60s" # The interval between smartctl polls
 - `smartctl_exp_rescan`: "10m" # The interval between rescanning for new/disappeared devices. If the interval is smaller than 1s no rescanning takes place. If any devices are configured with smartctl.device also no rescanning takes place.
@@ -44,7 +43,6 @@ Example Playbook
 roles:
 - role: genlab.smartctl_exporter
     smartctl_exp_version: "0.14.0"
-    smartctl_exp_dir: "/etc/exporters"
     smartctl_exp_config_dir: "/etc/exporters/config"
 ```
 

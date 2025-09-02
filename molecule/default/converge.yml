@@ -3,5 +3,4 @@
   hosts: all
   roles:
     - role: genlab.smartctl_exporter
-      smartctl_exp_dir: "/etc/exporters"
       smartctl_exp_config_dir: "/etc/exporters/config"
