@@ -26,8 +26,8 @@ ExecStart=/usr/local/bin/smartctl_exporter \
 {% if smartctl_exp_args is defined and smartctl_exp_args | length > 0 %}
       {{ smartctl_exp_args }} \
 {% endif %}
-{% if smartctl_exp_source_web_config_dir is defined and smartctl_exp_source_web_config_dir | length > 0 %} \
-    --web.config.file={{ smartctl_exp_web_config_dir }}/web_smartctl.conf
+{% if smartctl_exp_web_conf_path is defined and smartctl_exp_web_conf_path | length > 0 %} \
+    --web.config.file={{ smartctl_exp_config_dir }}/web_smartctl.conf
 {% endif %}
 
 SyslogIdentifier=smartctl_exporter
